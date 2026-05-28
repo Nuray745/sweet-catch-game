@@ -4,6 +4,7 @@ const gameOverScreen = document.getElementById("gameOverScreen");
 const scoreElement = document.getElementById("score");
 const livesElement = document.getElementById("lives");
 const basket = document.getElementById("basket");
+const gameArea = document.getElementById("gameArea");
 
 let score = 0;
 let lives = 3;
@@ -13,12 +14,23 @@ document.getElementById("startBtn").onclick = startGame;
 document.getElementById("restartBtn").onclick = startGame;
 
 function startGame() {
-    score = 0; lives = 3; gameRunning = true;
+    // 1. Köhnə obyektləri təmizlə
+    const items = document.querySelectorAll(".item");
+    items.forEach(item => item.remove());
+
+    // 2. Dəyişənləri sıfırla
+    score = 0; 
+    lives = 3; 
+    gameRunning = true;
+    
     scoreElement.innerText = score;
     livesElement.innerText = lives;
+    
+    // 3. Ekranları dəyiş
     startScreen.classList.remove("active");
     gameOverScreen.classList.remove("active");
     gameScreen.classList.add("active");
+    
     spawnLoop();
 }
 
@@ -42,7 +54,7 @@ function createItem() {
     item.innerText = isSweet ? "🍬" : "💣";
     item.style.left = Math.random() * (window.innerWidth - 50) + "px";
     item.style.top = "-50px";
-    document.getElementById("gameArea").appendChild(item);
+    gameArea.appendChild(item);
 
     let y = -50;
     const fall = setInterval(() => {
