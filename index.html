@@ -1,34 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Sweet Catch</title>
-    <link rel="stylesheet" href="style.css"/>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sweet Catch</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 </head>
 <body>
 
-    <div id="startScreen" class="screen active">
-        <h1>SWEET CATCH</h1>
-        <button id="startBtn">START GAME</button>
+  <div id="startScreen" class="screen active">
+    <div class="floating-candies"></div>
+    <img src="assets/home-text-removebg-preview.png" class="logo"/>
+    <div class="menu-card">
+      <button id="startBtn">START GAME</button>
+      <button id="howBtn">HOW TO PLAY</button>
+      <div class="start-highscore">
+        BEST SCORE: <span id="menuHighScore">0</span>
+      </div>
     </div>
 
-    <div id="gameScreen" class="screen">
-        <div id="ui">
-            <p>SCORE: <span id="score">0</span></p>
-            <p>LIVES: <span id="lives">3</span></p>
-            <p>BEST: <span id="highScore">0</span></p>
+    <div class="sound-note-box">
+      <span class="note-icon">🤫</span>
+      <p class="note-text">
+        Google Chrome is holding our music hostage! Just <span>Click the Screen</span> to unleash the beats! 🎵
+      </p>
+    </div>
+  </div>
+
+  <div id="howScreen" class="screen">
+    <div class="card instruction-card">
+      <h2>🍬 Game Rules & Guide 🎮</h2>
+      
+      <div class="rules-container">
+        <div class="rule-row">
+          <span class="rule-icon">🧺</span>
+          <div class="rule-text">
+            <strong>Move Basket:</strong> Move your mouse left and right to control the basket.
+          </div>
         </div>
-        <div id="gameArea">
-            <div id="basket">🧺</div>
+
+        <div class="rule-row match-sweet">
+          <span class="rule-icon">🍩</span>
+          <div class="rule-text">
+            <strong>Catch Sweets:</strong> Catch falling candies to earn <strong>+10 Points</strong>!
+          </div>
         </div>
-    </div>
 
-    <div id="gameOverScreen" class="screen">
-        <h1>GAME OVER</h1>
-        <button id="restartBtn">RESTART</button>
-    </div>
+        <div class="rule-row match-bomb">
+          <span class="rule-icon">💣</span>
+          <div class="rule-text">
+            <strong>Avoid Bombs:</strong> Stay away from bombs, or you will lose <strong>-1 Life</strong>!
+          </div>
+        </div>
 
-    <script src="script.js"></script>
+        <div class="rule-row match-pepper">
+          <span class="rule-icon">🌶️</span>
+          <div class="rule-text">
+            <strong>Watch out!</strong> Hot peppers reduce your score by <strong>-15 Points</strong>. Don't hit 0!
+          </div>
+        </div>
+      </div>
+
+      <button id="backBtn">🔙 BACK TO MENU</button>
+    </div>
+  </div>
+
+  <div id="gameScreen" class="screen">
+    <div class="top-bar">
+      <div>SCORE: <span id="score">0</span></div>
+      <div>❤️ <span id="lives">3</span></div>
+      <div>BEST: <span id="highScore">0</span></div>
+      <button id="homeBtn">🏠 HOME</button>
+    </div>
+    <div id="gameArea">
+      <div id="basket">
+        <img src="assets/basket.png" width="80"/>
+      </div>
+    </div>
+  </div>
+
+  <div id="gameOverScreen" class="screen">
+    <div class="game-over-card">
+      <div class="game-over-header">GAME OVER</div>
+      
+      <img src="assets/cupcake.png" class="deco-cupcake" alt="Cupcake"/>
+      <img src="assets/bomb.png" class="deco-bomb" alt="Bomb"/>
+
+      <div class="game-over-body">
+        <div class="score-label">YOUR SCORE</div>
+        <div id="finalScore">0</div>
+        
+        <div class="divider"></div>
+
+        <div class="highscore-container">
+          <span class="highscore-label">HIGH SCORE</span>
+          <div class="highscore-value-wrapper">
+            <span id="newHigh">0</span>
+            <span class="crown-icon">👑</span>
+          </div>
+        </div>
+
+        <div class="game-over-buttons">
+          <button id="restartBtn">🔄 PLAY AGAIN</button>
+          <button id="gameOverHomeBtn">🏠 MAIN MENU</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="exitModal" class="modal">
+    <div class="modal-box">
+      <h2>Exit Game?</h2>
+      <button id="yesExit">YES</button>
+      <button id="noExit">NO</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
