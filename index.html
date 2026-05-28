@@ -7,13 +7,26 @@
     <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-    <div id="ui">
-        <p>SCORE: <span id="score">0</span></p>
-        <p>LIVES: <span id="lives">3</span></p>
+    <div id="startScreen" class="screen active">
+        <h1>SWEET CATCH</h1>
+        <button id="startBtn">START GAME</button>
     </div>
-    <div id="gameArea">
-        <div id="basket">🧺</div>
+
+    <div id="gameScreen" class="screen">
+        <div id="ui">
+            <p>SCORE: <span id="score">0</span></p>
+            <p>LIVES: <span id="lives">3</span></p>
+        </div>
+        <div id="gameArea">
+            <div id="basket">🧺</div>
+        </div>
     </div>
+
+    <div id="gameOverScreen" class="screen">
+        <h1>GAME OVER</h1>
+        <button id="restartBtn">RESTART</button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
