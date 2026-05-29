@@ -27,7 +27,6 @@ const menuHighScore = document.getElementById("menuHighScore");
 const finalScore = document.getElementById("finalScore");
 const newHigh = document.getElementById("newHigh"); 
 
-// Səs Düyməsi təyini
 const musicToggleBtn = document.getElementById("musicToggleBtn");
 let isMusicOn = false; 
 
@@ -52,7 +51,6 @@ let highScore = localStorage.getItem("sweetHighScore") || 0;
 highScoreText.innerText = highScore;
 menuHighScore.innerText = highScore;
 
-// Musiqi yandırıb/söndürmə məntiqi
 function toggleMusic() {
   if (!isMusicOn) {
     homeBgm.play()
@@ -74,7 +72,6 @@ function toggleMusic() {
   }
 }
 
-// Səs düyməsi kliklənməsi
 musicToggleBtn.onclick = (e) => {
   e.stopPropagation(); 
   toggleMusic();
@@ -112,7 +109,6 @@ function startGame(){
   highscoreSound.pause(); 
   gameOverSound.pause(); 
 
-  // Oyun başlayanda səs düyməsini gizlədirik
   musicToggleBtn.style.display = "none";
 
   startScreen.classList.remove("active");
@@ -140,7 +136,6 @@ function goHome(){
   highscoreSound.pause();
   gameOverSound.pause(); 
 
-  // Ana menyuya qayıdanda səs düyməsini yenidən açırıq
   musicToggleBtn.style.display = "flex";
   if (isMusicOn) {
     homeBgm.play().catch(() => {});
@@ -166,7 +161,6 @@ function endGame(){
   pepperSound.pause();
   highscoreSound.pause();
   
-  // Game over olanda səs düyməsini menyu üçün yenidən görünən edirik
   musicToggleBtn.style.display = "flex";
 
   gameOverSound.currentTime = 0;
