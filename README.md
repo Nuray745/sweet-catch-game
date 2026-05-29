@@ -18,7 +18,7 @@ Initial game planning created in Excalidraw:
 
 # 🎮 Live Demo
 
-👉 Add your GitHub Pages link here:
+👉 GitHub Pages link here:
 
 [PLAY THE GAME HERE](https://nuray745.github.io/sweet-catch-game/)
 
