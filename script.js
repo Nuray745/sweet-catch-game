@@ -27,6 +27,10 @@ const menuHighScore = document.getElementById("menuHighScore");
 const finalScore = document.getElementById("finalScore");
 const newHigh = document.getElementById("newHigh"); 
 
+// Səs Düyməsi təyini
+const musicToggleBtn = document.getElementById("musicToggleBtn");
+let isMusicOn = false; 
+
 let score = 0;
 let lives = 3;
 let gameRunning = false;
@@ -48,13 +52,33 @@ let highScore = localStorage.getItem("sweetHighScore") || 0;
 highScoreText.innerText = highScore;
 menuHighScore.innerText = highScore;
 
-function playHomeMusic() {
-  if (startScreen.classList.contains("active")) {
-    homeBgm.play().catch(err => {
-      console.log("Brauzer musiqini hələ bloka salıb.", err);
-    });
+// Musiqi yandırıb/söndürmə məntiqi
+function toggleMusic() {
+  if (!isMusicOn) {
+    homeBgm.play()
+      .then(() => {
+        isMusicOn = true;
+        musicToggleBtn.classList.add("music-on");
+        musicToggleBtn.querySelector(".music-icon").innerText = "🔊";
+        musicToggleBtn.querySelector(".music-text").innerText = "Music: ON";
+      })
+      .catch(err => {
+        console.log("Brauzer musiqini hələ bloka salıb.", err);
+      });
+  } else {
+    homeBgm.pause();
+    isMusicOn = false;
+    musicToggleBtn.classList.remove("music-on");
+    musicToggleBtn.querySelector(".music-icon").innerText = "🔇";
+    musicToggleBtn.querySelector(".music-text").innerText = "Music: OFF";
   }
 }
+
+// Səs düyməsi kliklənməsi
+musicToggleBtn.onclick = (e) => {
+  e.stopPropagation(); 
+  toggleMusic();
+};
 
 function saveHighScore(){
   if(score > highScore){
@@ -88,6 +112,9 @@ function startGame(){
   highscoreSound.pause(); 
   gameOverSound.pause(); 
 
+  // Oyun başlayanda səs düyməsini gizlədirik
+  musicToggleBtn.style.display = "none";
+
   startScreen.classList.remove("active");
   howScreen.classList.remove("active");
   gameOverScreen.classList.remove("active");
@@ -112,7 +139,12 @@ function goHome(){
   pepperSound.pause();
   highscoreSound.pause();
   gameOverSound.pause(); 
-  playHomeMusic();
+
+  // Ana menyuya qayıdanda səs düyməsini yenidən açırıq
+  musicToggleBtn.style.display = "flex";
+  if (isMusicOn) {
+    homeBgm.play().catch(() => {});
+  }
 
   exitModal.classList.remove("show");
 }
@@ -134,9 +166,12 @@ function endGame(){
   pepperSound.pause();
   highscoreSound.pause();
   
+  // Game over olanda səs düyməsini menyu üçün yenidən görünən edirik
+  musicToggleBtn.style.display = "flex";
+
   gameOverSound.currentTime = 0;
   gameOverSound.play().catch(err => {
-    console.log("Game over səsi çalınmadı, klikləmə gözlənilir.", err);
+    console.log("Game over səsi çalınmadı.", err);
   });
 }
 
@@ -323,7 +358,6 @@ howBtn.onclick = () => {
 backBtn.onclick = () => {
   howScreen.classList.remove("active");
   startScreen.classList.add("active");
-  playHomeMusic();
 };
 homeBtn.onclick = () => {
   gameRunning = false;
@@ -353,7 +387,3 @@ function initHomeCandies() {
   }
 }
 initHomeCandies();
-
-document.addEventListener("click", () => {
-  playHomeMusic();
-}, { once: false });
