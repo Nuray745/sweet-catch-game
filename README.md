@@ -1,4 +1,4 @@
-# 🍎 Sweet Catcher
+# 🧁 Sweet Catcher
 
 Welcome to **Sweet Catcher** — a simple and fun browser-based arcade game built with **HTML, CSS, and Vanilla JavaScript**.
 
